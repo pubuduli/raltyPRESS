@@ -1,0 +1,927 @@
+# MASTER DEVELOPMENT PROMPT — realtyPRESS AI MEDIA STUDIO
+## Complete Application Audit, Fixes, Upgrades & Production Readiness
+
+Act as a **senior full-stack software architect, React/TypeScript engineer, Node.js backend engineer, Google Gemini AI integration specialist, UI/UX designer, QA engineer, and Canadian real estate media strategist**.
+
+Your task is to comprehensively audit, repair, upgrade, and optimize my existing application:
+
+**Application:** realtyPRESS AI Media Studio  
+**Purpose:** An AI-powered Canadian real estate news research, verification, editorial planning, content creation, visual production, publishing preparation, and performance management platform.
+
+I have supplied the complete existing source-code project. You must inspect the actual source files, understand the current architecture, identify defects, and implement the improvements directly in the existing application.
+
+This is an upgrade project, NOT a request to build a new application.
+
+---
+
+# 1. CRITICAL DEVELOPMENT RULES
+
+Before making any changes:
+
+1. Inspect the entire existing source-code project.
+2. Identify the frontend, backend, database, AI integrations, components, utilities, routing, and existing application workflows.
+3. Understand how the current features communicate with each other.
+4. Identify broken, incomplete, misleading, duplicated, or placeholder functionality.
+5. Preserve existing working features and business logic wherever possible.
+6. Do not unnecessarily replace the existing technology stack.
+7. Maintain the existing React, TypeScript, Node.js/Express, Gemini API, and Dexie/IndexedDB architecture unless a specific technical reason requires a change.
+8. Preserve the established realtyPRESS visual identity and existing design direction.
+9. Do not introduce paid services, subscriptions, or unnecessary external dependencies.
+10. Do not fabricate data, research findings, news, analytics, verification results, or AI capabilities.
+
+**Important:** Do not simply provide recommendations or code snippets. Implement the corrections in the actual source files. Update all affected components, backend endpoints, database operations, and supporting utilities.
+
+Work systematically across the entire application. Ensure that changes in one module do not break other modules.
+
+Before modifying existing user data, create and verify a backup. Never silently delete, overwrite, or reset existing records.
+
+---
+
+# 2. DATA INTEGRITY & DEMO DATA MANAGEMENT
+
+Audit and repair the existing database initialization and sample-data handling.
+
+### Problems to address
+
+- Demo/sample stories are automatically inserted when database tables are empty.
+- Sample stories can appear as real verified or approved stories.
+- Dashboard analytics contain seeded sample metrics.
+- Sample records can reappear after deleting them and refreshing the application.
+- Initial follower counts and growth targets are hardcoded.
+
+### Required improvements
+
+1. Remove automatic demo-data seeding from normal production initialization.
+2. Introduce a clearly identifiable Demo Mode.
+3. Keep demonstration records completely separate from real operational records.
+4. Add an obvious Demo Mode indicator whenever demo data is being displayed.
+5. Ensure sample stories can never be mistaken for verified real-world news.
+6. Remove hardcoded sample analytics from the production dashboard.
+7. Do not display invented follower counts, impressions, reach, engagement rates, or performance results.
+8. When actual data is unavailable, display a clear empty state such as:
+   - No analytics data available.
+   - Connect or import your social media performance data.
+   - No published content recorded yet.
+9. Add editable business profile settings for:
+   - Starting follower count.
+   - Current follower count.
+   - Target follower count.
+   - Target achievement date.
+   - Reporting period.
+10. Provide safe options to:
+   - Enable Demo Mode.
+   - Disable Demo Mode.
+   - Clear demo records.
+   - Preserve production records.
+11. Ensure deleting demo data does not trigger automatic reseeding.
+12. Add database versioning and safe schema migration handling.
+
+**Acceptance criteria:** A fresh production installation must not show fabricated stories or analytics. Refreshing the application must not recreate deleted demo records.
+
+---
+
+# 3. GEMINI AI INTEGRATION & ZERO-COST OPTIMIZATION
+
+Audit the complete AI integration in the backend and frontend.
+
+The application should prioritize free-tier-compatible API usage and avoid unexpected API expenditure.
+
+### Model configuration
+
+Create a centralized AI configuration manager.
+
+Requirements:
+
+- Make Gemini 3.8 Flash the preferred model only if it is available and eligible under the configured API account's free-tier terms.
+- Disable Gemini 4 Argon and other paid models by default.
+- Remove automatic fallback to paid models.
+- Do not assume a Google AI Pro consumer subscription provides Gemini API credits.
+- Clearly distinguish consumer subscriptions from API billing.
+- Allow model configuration through server-side environment variables.
+- Display the selected model and its configured operating mode in the application settings.
+
+Do not claim a model is free simply because it is available through the API. Check current model availability and account-specific pricing eligibility before using it.
+
+### AI cost protection
+
+Implement:
+
+1. Centralized AI request handling.
+2. Request validation.
+3. Token/output limits.
+4. Request timeout handling.
+5. Duplicate-request prevention.
+6. Retry limits.
+7. API usage logging.
+8. Error handling for quota exhaustion.
+9. Clear reporting of API failures.
+10. A configurable daily request limit.
+11. A configurable maximum output length.
+12. No automatic paid-model escalation.
+
+### Remove fabricated AI fallbacks
+
+The current application must not generate generic or invented news when Gemini requests fail.
+
+If an AI request fails:
+
+- Display the actual error.
+- Preserve the user's input.
+- Provide a retry option.
+- Allow manual editing.
+- Never present fallback-generated content as researched, verified, or factual.
+
+Validate AI responses against the expected JSON schema before saving them.
+
+Do not silently accept malformed or incomplete AI output.
+
+---
+
+# 4. CANADIAN NEWS RADAR — REAL NEWS DISCOVERY
+
+Upgrade News Radar into a genuine Canadian real estate news discovery and research system.
+
+The current application must not describe manually pasted articles as live news discovery.
+
+### Required capabilities
+
+Implement genuine news discovery using supported Google Search grounding capabilities and/or reliable RSS feeds.
+
+The system should discover relevant developments across:
+
+- Canadian residential real estate.
+- Housing affordability.
+- Mortgage rates.
+- Canadian housing policy.
+- Federal government housing initiatives.
+- Provincial housing legislation.
+- Municipal zoning and development.
+- Real estate brokerage regulations.
+- REALTOR® industry developments.
+- CREA announcements.
+- Provincial real estate associations.
+- MLS and listing-data developments.
+- Rental housing.
+- Condominium markets.
+- Commercial real estate.
+- Housing construction.
+- Real estate technology.
+- AI adoption in real estate.
+- Property investment.
+- Real estate finance.
+
+### News discovery filters
+
+Provide filtering by:
+
+- Canada-wide.
+- Province.
+- City or region.
+- Topic.
+- Publication date.
+- News source.
+- Importance.
+- Relevance to Canadian real estate agents.
+
+### Every news result must include
+
+- Headline.
+- Short summary.
+- Original article URL.
+- Publisher/source.
+- Publication date, when available.
+- Relevant province/city.
+- News category.
+- Why this matters to Canadian real estate professionals.
+- Supporting facts.
+- Research status.
+- Discovery timestamp.
+
+### News quality management
+
+Implement:
+
+1. Duplicate article detection.
+2. URL normalization.
+3. Source attribution.
+4. Publication-date validation.
+5. Relevant-content filtering.
+6. Outdated-news detection.
+7. Article relevance scoring.
+8. Source reliability indicators.
+9. Manual article URL entry.
+10. Manual research fallback.
+
+Do not invent missing publication dates, article URLs, statistics, quotations, or publisher names.
+
+### Research status
+
+Clearly distinguish:
+
+- Discovered.
+- Research Pending.
+- Research Completed.
+- Awaiting Verification.
+- Verified.
+- Rejected.
+- Archived.
+
+Do not display a LIVE label unless the application is genuinely retrieving current external information.
+
+If Search grounding or RSS integration is unavailable, clearly identify the feature as manual research rather than pretending it is live.
+
+---
+
+# 5. EVIDENCE-BASED FACT-CHECKING & EDITORIAL APPROVAL
+
+Implement a reliable editorial verification workflow.
+
+A user must not be able to make a story Verified simply by selecting a dropdown option.
+
+### Verification requirements
+
+For every important factual claim, capture:
+
+- Claim text.
+- Supporting source.
+- Original source URL.
+- Relevant publication date.
+- Evidence excerpt or supporting information.
+- Verification status.
+- Reviewer.
+- Verification timestamp.
+- Reviewer notes.
+
+Support multiple sources per claim.
+
+### Verification states
+
+Use the following workflow:
+
+1. Unverified.
+2. Research in Progress.
+3. Evidence Collected.
+4. Awaiting Human Review.
+5. Verified.
+6. Rejected.
+7. Needs Correction.
+
+### Important rules
+
+- AI may identify claims requiring verification.
+- AI may compare claims against supplied evidence.
+- AI must not independently certify a story as factually verified.
+- Human approval is required for final verification.
+- A story cannot enter the approved publishing workflow until mandatory checks are complete.
+- Missing or contradictory evidence must be clearly flagged.
+- Unsupported numerical claims must be removed or explicitly qualified.
+- Do not fabricate quotations or attribute statements to organizations without evidence.
+
+### Editorial approval checklist
+
+Before a story is approved, check:
+
+- Headline accuracy.
+- Source credibility.
+- Publication date.
+- Numerical accuracy.
+- Names and organization accuracy.
+- Canadian geographic relevance.
+- Context and interpretation.
+- Potentially misleading claims.
+- Original source links.
+- Content quality.
+
+Create an audit trail for verification and approval changes.
+
+---
+
+# 6. REALTYPRESS CONTENT ENGINE — STRICT V8 COMPLIANCE
+
+Upgrade the content-generation workflow to follow the official realtyPRESS V8 editorial standards.
+
+The content engine must create useful, accurate, professional content for Canadian real estate professionals.
+
+### Required story workflow
+
+1. Select a news story.
+2. Review the original source.
+3. Complete research.
+4. Identify important factual claims.
+5. Collect supporting evidence.
+6. Complete human verification.
+7. Identify relevance to Canadian real estate agents.
+8. Generate editorial analysis.
+9. Generate social media caption.
+10. Generate infographic content.
+11. Complete editorial quality checks.
+12. Submit for approval.
+
+### V8 content requirements
+
+For the designated social caption:
+
+- 250–350 words.
+- Exactly five paragraphs.
+- Exactly ten relevant hashtags.
+- Include #realtyPRESS.
+- Use professional Canadian English.
+- Maintain a factual, analytical, engaging tone.
+- Explain why the news matters to Canadian real estate agents.
+- Avoid unsupported speculation.
+- Avoid exaggerated clickbait.
+- Avoid repetitive wording.
+- Clearly distinguish confirmed facts from analysis.
+
+Do not rely on the AI model's claimed word count. Implement actual programmatic validation.
+
+Create a validation utility that checks:
+
+- Word count.
+- Paragraph count.
+- Hashtag count.
+- Required hashtag.
+- Duplicate hashtags.
+- Empty paragraphs.
+- Unsupported claims where evidence is missing.
+
+Provide clear validation errors and allow regeneration or manual editing.
+
+### Additional content formats
+
+Support:
+
+- LinkedIn posts.
+- Facebook posts.
+- Instagram captions.
+- Short-form news summaries.
+- Editorial analysis.
+- Educational content.
+- Carousel content.
+- Infographic copy.
+- Video scripts.
+- Reel captions.
+
+Content should be tailored to each platform rather than simply copied between platforms.
+
+---
+
+# 7. CONTENT CALENDAR & TIME-ZONE CORRECTIONS
+
+Audit and fix all calendar date and time calculations.
+
+### Critical issue
+
+The current application uses a fixed Toronto-to-Colombo time difference. This is incorrect because Toronto changes between Eastern Standard Time and Eastern Daylight Time.
+
+### Required improvements
+
+Use proper IANA time zones:
+
+- Toronto: America/Toronto
+- Sri Lanka: Asia/Colombo
+
+Use a reliable timezone-aware implementation, such as Intl.DateTimeFormat or an appropriate timezone library.
+
+### Calendar functionality
+
+Implement:
+
+- Month view.
+- Week view.
+- Day view.
+- Scheduled content.
+- Draft content.
+- Published content.
+- Content approval status.
+- Platform selection.
+- Scheduled publication time.
+- Content preview.
+- Edit and reschedule.
+- Duplicate content.
+- Delete with confirmation.
+
+Ensure correct handling of:
+
+- Daylight saving time.
+- Month boundaries.
+- Year boundaries.
+- UTC storage.
+- Local display.
+- Timezone conversion.
+
+Replace hardcoded calendar dates with dynamic dates.
+
+### Repurpose workflow
+
+Fix the existing Published Library repurpose action.
+
+When a user clicks Repurpose:
+
+1. Pass the selected published post to the content editor.
+2. Preserve the original post reference.
+3. Create a new draft rather than overwriting the published post.
+4. Allow platform-specific adaptation.
+5. Allow editing before saving.
+6. Record the relationship between the original post and the repurposed draft.
+
+---
+
+# 8. DATABASE BACKUP, IMPORT & RESTORE
+
+Audit the entire Dexie/IndexedDB database management system.
+
+### Critical requirement
+
+Do not allow JSON imports to clear existing records before validating the imported data.
+
+### Implement safe backup and restore
+
+1. Export all relevant application database tables.
+2. Include schema version and export timestamp.
+3. Validate file structure.
+4. Validate application version compatibility.
+5. Validate every database table.
+6. Validate required fields and data types.
+7. Identify missing or invalid records.
+8. Display an import preview.
+9. Show the number of records to be created, updated, and replaced.
+10. Create an automatic recovery backup.
+11. Ask for explicit confirmation.
+12. Perform import using a safe transaction.
+13. Roll back on failure.
+14. Preserve the previous database if import fails.
+
+### Additional features
+
+- Manual backup.
+- Manual restore.
+- Downloadable JSON backup.
+- Last backup timestamp.
+- Backup history.
+- Database health status.
+- Schema version display.
+- Safe database migration.
+
+Never silently overwrite an existing database.
+
+Never delete user content during application initialization.
+
+---
+
+# 9. APPLICATION SECURITY & BACKEND HARDENING
+
+Audit the Express backend and all API endpoints.
+
+The application must be suitable for secure private operational use.
+
+### Implement
+
+- Server-side API key storage.
+- No API secrets in frontend bundles.
+- Authentication for protected application functions.
+- Session management.
+- Secure cookie configuration where applicable.
+- Authorization checks.
+- Input validation.
+- Request-size limits.
+- Rate limiting.
+- CORS restrictions.
+- Secure error responses.
+- Request timeout handling.
+- Protection against repeated expensive AI requests.
+- Safe file upload validation, where applicable.
+- Environment-variable validation.
+- Security-conscious logging.
+
+### Backend requirements
+
+Review every endpoint and ensure:
+
+- It validates input.
+- It handles missing fields.
+- It returns consistent response structures.
+- It handles exceptions.
+- It does not expose internal secrets.
+- It does not return unnecessary sensitive information.
+- It does not permit unauthorized destructive actions.
+
+Do not introduce unnecessary paid authentication providers.
+
+If a full authentication system is not feasible in the current deployment environment, clearly document the limitation and implement the strongest practical protection supported by the existing architecture.
+
+---
+
+# 10. VISUAL STUDIO & MEDIA PRODUCTION UPGRADES
+
+Upgrade the existing Visual Studio and Reel Studio without breaking their current functionality.
+
+### Visual Studio
+
+Improve:
+
+- Design creation workflow.
+- Template selection.
+- Canvas preview.
+- Image upload.
+- Asset library.
+- Text editing.
+- Headline positioning.
+- Brand colour controls.
+- Image positioning.
+- Aspect ratio selection.
+- Export management.
+
+### Required formats
+
+- 4:5 — LinkedIn/Instagram portrait infographic.
+- 9:16 — Instagram Stories, Reels and vertical video.
+- 1:1 — Square social post.
+- 16:9 — Landscape content.
+
+### realtyPRESS visual identity
+
+Use the established brand palette:
+
+- Red: #F20000
+- Dark charcoal: #242626
+- White: #FFFFFF
+
+Preserve the established professional editorial design direction.
+
+Use appropriate typography, spacing, contrast, visual hierarchy, alignment, and readable information density.
+
+Do not introduce an unrelated visual identity.
+
+### Reel Studio
+
+Improve:
+
+- Reel script generation.
+- Scene-by-scene planning.
+- Scene duration.
+- Voice-over text.
+- On-screen text.
+- Visual direction.
+- Captions.
+- Transitions.
+- Background music notes.
+- Export-ready production instructions.
+
+Do not claim that a video or image has been generated unless the corresponding generation service has actually completed successfully.
+
+Clearly distinguish between:
+
+- AI-generated scripts.
+- Production instructions.
+- Uploaded media.
+- Generated images.
+- Generated videos.
+- Final exported assets.
+
+Provide graceful fallback options when an external media-generation service is unavailable.
+
+---
+
+# 11. ANALYTICS & ORGANIC GROWTH DASHBOARD
+
+Upgrade the dashboard to provide meaningful operational and social media performance insights.
+
+### Critical rule
+
+Never display invented social media analytics.
+
+Only show:
+
+- Actual imported metrics.
+- Actual recorded application activity.
+- Clearly identified manually entered figures.
+- Clearly labelled calculated metrics.
+
+### Analytics features
+
+Support:
+
+- Starting followers.
+- Current followers.
+- Follower growth.
+- Growth percentage.
+- Reach.
+- Impressions.
+- Views.
+- Engagement.
+- Engagement rate.
+- Published content count.
+- Content performance.
+- Platform comparison.
+- Reporting-period comparison.
+
+### Data collection
+
+Provide CSV import functionality for social media analytics where supported.
+
+Allow manual entry when official API integration is unavailable.
+
+Record:
+
+- Data source.
+- Import date.
+- Reporting period.
+- Platform.
+- Metric definitions.
+
+### Growth analysis
+
+Provide useful insights:
+
+- Best-performing content.
+- Best-performing topics.
+- Best-performing content formats.
+- Posting consistency.
+- Engagement trends.
+- Audience growth trends.
+- Content opportunities.
+
+Clearly distinguish actual historical performance from AI-generated recommendations.
+
+### Target tracking
+
+Allow the user to configure:
+
+- Current followers.
+- Growth target.
+- Target date.
+- Monthly growth objective.
+
+Use real data to calculate progress.
+
+Do not invent predicted results or guarantee growth.
+
+---
+
+# 12. UI/UX & APPLICATION-WIDE DESIGN IMPROVEMENTS
+
+Perform a comprehensive UI/UX review of the existing application.
+
+Preserve the existing realtyPRESS identity.
+
+Do not rebuild the application unnecessarily.
+
+### Design direction
+
+Create a polished, professional, modern editorial media-management interface.
+
+Maintain:
+
+- Dark charcoal sidebar.
+- Red accent colour.
+- Clean dashboard.
+- Consistent typography.
+- Professional cards.
+- Clear information hierarchy.
+- Balanced spacing.
+- Consistent iconography.
+- Responsive layouts.
+
+### Improve
+
+- Sidebar navigation.
+- Dashboard information hierarchy.
+- Card consistency.
+- Table readability.
+- Empty states.
+- Loading states.
+- Error messages.
+- Confirmation dialogs.
+- Form validation.
+- Modal usability.
+- Responsive behaviour.
+- Accessibility.
+- Keyboard navigation.
+
+### Interaction requirements
+
+Every visible button, dropdown, tab, menu, and action must perform its intended function.
+
+Remove:
+
+- Non-functional buttons.
+- Placeholder actions.
+- Misleading status indicators.
+- Duplicate controls.
+- Unnecessary animations.
+- Dead-end workflows.
+
+Use confirmation dialogs for destructive actions.
+
+Show clear success and error feedback.
+
+Ensure the application works on desktop, tablet, and mobile.
+
+---
+
+# 13. APPLICATION-WIDE WORKFLOW INTEGRATION
+
+Audit the entire application to ensure that its modules work together.
+
+The intended workflow is:
+
+**News Discovery → Research → Evidence Collection → Human Verification → Editorial Approval → Content Generation → Visual Production → Scheduling → Publishing Record → Performance Analytics**
+
+All modules must share the correct story and content references.
+
+### Verify integration between
+
+- Dashboard.
+- News Radar.
+- Story Manager.
+- Content Studio.
+- Approval Centre.
+- Visual Studio.
+- Reel Studio.
+- Content Calendar.
+- Published Library.
+- Analytics.
+- Brand Library.
+- Settings.
+- Database backup and restore.
+
+### Required integration behaviour
+
+1. Selecting a news article should create or update the correct story record.
+2. Research evidence should remain attached to its story.
+3. Verification status should be shared across relevant modules.
+4. Approved stories should be available to Content Studio.
+5. Generated content should retain its original story reference.
+6. Visual assets should remain linked to the correct content.
+7. Approved content should be available for scheduling.
+8. Scheduling changes should be reflected in the calendar.
+9. Published records should be available in Published Library.
+10. Repurposing should create a new linked draft.
+11. Analytics should connect to the appropriate published content wherever matching data exists.
+
+Avoid duplicated records and inconsistent statuses.
+
+Use stable record IDs and appropriate database relationships.
+
+---
+
+# 14. COMPREHENSIVE QA & TESTING
+
+After implementing all improvements, conduct a complete application-wide quality assurance review.
+
+Do not stop after modifying the code.
+
+Run the available build, type checks, linting, and automated tests.
+
+Fix all errors introduced by the changes.
+
+### Test the following areas
+
+1. Application startup.
+2. Database initialization.
+3. Demo Mode isolation.
+4. Database persistence.
+5. Database migration.
+6. Backup creation.
+7. Restore validation.
+8. AI configuration.
+9. Gemini API errors.
+10. Free-tier model restrictions.
+11. AI response validation.
+12. News discovery.
+13. Article source attribution.
+14. Duplicate article detection.
+15. Research workflow.
+16. Evidence collection.
+17. Human verification.
+18. Editorial approval.
+19. V8 caption validation.
+20. Content Studio.
+21. Visual Studio.
+22. Reel Studio.
+23. Content Calendar.
+24. Toronto daylight-saving-time conversion.
+25. Repurpose workflow.
+26. Published Library.
+27. Analytics imports.
+28. Dashboard metric accuracy.
+29. Backend security.
+30. Responsive layouts.
+
+### V8 automated validation
+
+Create or improve automated tests confirming:
+
+- Caption contains 250–350 words.
+- Caption contains exactly five paragraphs.
+- Caption contains exactly ten hashtags.
+- Caption includes #realtyPRESS.
+- The caption does not contain empty paragraphs.
+- Word count is calculated programmatically.
+
+### Build quality
+
+- Fix TypeScript errors.
+- Fix React warnings.
+- Fix broken imports.
+- Fix invalid database queries.
+- Fix API response mismatches.
+- Fix broken navigation.
+- Fix runtime exceptions.
+- Fix console errors.
+- Fix failed component interactions.
+- Fix responsive layout issues.
+
+Do not hide errors merely to achieve a successful build.
+
+---
+
+# 15. FINAL IMPLEMENTATION REPORT
+
+After completing the work, provide a structured report containing:
+
+### A. Project audit
+- Existing architecture.
+- Main technical weaknesses.
+- Critical issues identified.
+
+### B. Implemented corrections
+- Files modified.
+- Functions modified.
+- Components upgraded.
+- Backend endpoints changed.
+- Database changes.
+
+### C. New functionality
+- Features added.
+- Workflow improvements.
+- Security improvements.
+- UI/UX improvements.
+
+### D. AI configuration
+- Selected Gemini model.
+- Free-tier eligibility assumptions and limitations.
+- API configuration requirements.
+- Cost protection measures.
+
+### E. Testing results
+- Build status.
+- TypeScript status.
+- Automated test results.
+- Functional test results.
+- Known remaining issues.
+
+### F. Outstanding tasks
+Clearly identify anything that could not be completed because of:
+
+- External API restrictions.
+- Missing credentials.
+- Unsupported platform capabilities.
+- Deployment limitations.
+- Missing integrations.
+
+Do not claim that something has been tested or completed unless it actually has.
+
+### G. Production readiness
+Give an honest assessment:
+
+- Ready for deployment.
+- Ready with minor outstanding issues.
+- Requires additional development.
+- Not ready for production.
+
+---
+
+# 16. FINAL EXECUTION INSTRUCTIONS
+
+This is a complete application improvement project.
+
+Prioritize the following order while implementing:
+
+1. Protect existing data and eliminate fabricated records.
+2. Fix AI integration and API cost controls.
+3. Implement genuine news discovery.
+4. Strengthen research and fact verification.
+5. Enforce realtyPRESS V8 content standards.
+6. Repair calendar and repurposing workflows.
+7. Secure backup and restore.
+8. Harden backend security.
+9. Upgrade Visual Studio and Reel Studio.
+10. Improve analytics.
+11. Refine application-wide UI/UX.
+12. Complete integration testing and QA.
+
+You may organize your internal implementation into phases, but the objective is to complete the entire project rather than stopping after the first phase.
+
+If you encounter a technical limitation, implement the best safe alternative and document the limitation.
+
+Do not remove working functionality simply because it is difficult to maintain.
+
+Do not replace real data with sample data.
+
+Do not fabricate news or verification results.
+
+Do not introduce paid API usage without explicit configuration and authorization.
+
+**FINAL OBJECTIVE: Transform the existing realtyPRESS AI Media Studio into a stable, secure, cost-conscious, evidence-driven, professional Canadian real estate media production platform while preserving its existing architecture, brand identity, and useful functionality.**

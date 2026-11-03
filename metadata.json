@@ -1,0 +1,6 @@
+{
+  "name": "realtyPRESS AI MEDIA STUDIO",
+  "description": "AI-powered Content Management System and editorial production platform for Canadian real estate news and industry insights.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
